@@ -11,5 +11,5 @@ function SM:update(dt)
 end
 
 function SM:draw()
-    Current:draw() 
+    Current:draw()
 end

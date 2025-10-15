@@ -1,16 +1,18 @@
-Object = require("object")
-
-require("camera")
-require("input")
-require("res")
-require("sm")
-require("utils")
-
-require("objects.physics_object")
-require("objects.player")
-require("objects.wall")
+require("stuff.object")
+require("stuff.camera")
+require("stuff.input")
+require("stuff.res")
+require("stuff.sm")
+require("stuff.utils")
 
 function love.load()
+    love.graphics.setDefaultFilter("nearest", "nearest")
+    love.graphics.setLineStyle("rough")
+    
+    local objects = love.filesystem.getDirectoryItems("objects")
+    for _, object in ipairs(objects) do
+        require("objects."..object:sub(1, #object-#".lua"))
+    end
     Res:init()
     SM:init("game")
 end
