@@ -25,6 +25,7 @@ function Game:update(dt)
 end
 
 function Game:draw()
+    Camera:start()
     -- table.sort(self.objects, function (a, b)
     --     return a.z < b.z
     -- end)
@@ -33,6 +34,7 @@ function Game:draw()
             object:draw()
         end
     end
+    Camera:stop()
 end
 
 return Game

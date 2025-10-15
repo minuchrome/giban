@@ -13,6 +13,9 @@ function love.load()
     for _, object in ipairs(objects) do
         require("objects."..object:sub(1, #object-#".lua"))
     end
+
+    Font = love.graphics.newFont("assets/fonts/Galmuri9.ttf")
+
     Res:init()
     SM:init("game")
 end

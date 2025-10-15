@@ -4,10 +4,15 @@ local img = NewImage("player")
 
 function Player:init(x, y)
     PhysicsObject.init(self)
+
     self.x = x
     self.y = y
     self.w = img:getWidth()
     self.h = img:getHeight()
+
+    Camera:offset(Res.w/2, Res.h/2)
+    Camera:set(self.x, self.y)
+    Camera:snap_back()
 
     self.tags = {
         player = true,
@@ -15,6 +20,7 @@ function Player:init(x, y)
 end
 
 function Player:update(dt)
+    Camera:set(self.x, self.y)
     if Input.right.down then
         self:move_x(2*dt, "wall")
     end

@@ -24,8 +24,8 @@ function Camera:offset(x, y)
 end
 
 function Camera:snap_back()
-    self.x = self.offset_x+self.target_x
-    self.y = self.offset_y+self.target_y
+    self.x = -self.offset_x+self.target_x
+    self.y = -self.offset_y+self.target_y
 end
 
 function Camera:set_shake(dur)
@@ -37,7 +37,7 @@ function Camera:start()
     if self.shake.duration > 0.1 then
         love.graphics.translate(self.shake.x, self.shake.y)
     end
-    love.graphics.translate(self.x, self.y)
+    love.graphics.translate(-self.x, -self.y)
 end
 
 function Camera:stop()
@@ -51,6 +51,6 @@ function Camera:update(dt)
     end
     self.shake.duration = self.shake.duration+(0-self.shake.duration)*self.shake.damp*dt
     
-    self.x = self.x+(self.offset_x+self.target_x-self.x)*self.damp_x*dt
-    self.y = self.y+(self.offset_y+self.target_y-self.y)*self.damp_y*dt
+    self.x = self.x+(-self.offset_x+self.target_x-self.x)*self.damp_x*dt
+    self.y = self.y+(-self.offset_y+self.target_y-self.y)*self.damp_y*dt
 end
