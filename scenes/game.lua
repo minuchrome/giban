@@ -9,12 +9,15 @@ end
 function Game:init()
     self.objects = {}
     self:add(Player, 100, 100)
+    self:add(Wall, 200, 100)
 end
 
 function Game:update(dt)
     for i = 1, #self.objects do
         local object = self.objects[i]
-        object:update(dt)
+        if object.update then
+            object:update(dt)
+        end
         if object.remove then
             table.remove(self.objects, i)
         end
@@ -22,11 +25,13 @@ function Game:update(dt)
 end
 
 function Game:draw()
-    table.sort(self.objects, function (a, b)
-        return a.z < b.z
-    end)
+    -- table.sort(self.objects, function (a, b)
+    --     return a.z < b.z
+    -- end)
     for i, object in ipairs(self.objects) do
-        object:draw()
+        if object.draw then
+            object:draw()
+        end
     end
 end
 

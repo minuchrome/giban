@@ -7,11 +7,11 @@ function PhysicsObject:init(x, y, w, h)
     self.h = h or 0
 end
 
-function PhysicsObject:col(a, tag)
-    for _, b in ipairs(Game.objects) do
-        if b.tags[tag] then
-            if a ~= b and AABB(a, b) then
-                return b
+function PhysicsObject:col(tag)
+    for _, other in ipairs(Current.objects) do
+        if other.tags[tag] then
+            if self ~= other and AABB(self, other) then
+                return other
             end
         end
     end
