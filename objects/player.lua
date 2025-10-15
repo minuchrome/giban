@@ -13,3 +13,7 @@ end
 function Player:update(dt)
     
 end
+
+function Player:draw()
+    love.graphics.draw(img, self.x, self.y)
+end

@@ -2,9 +2,10 @@ Object = require("object")
 require("sm")
 require("utils")
 require("objects.physics_object")
+require("objects.player")
 
 function love.load()
-    SM:load("game")
+    SM:init("game")
 end
 
 function love.update(dt)
