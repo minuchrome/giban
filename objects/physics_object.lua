@@ -1,0 +1,45 @@
+PhysicsObject = Object:new()
+
+function PhysicsObject:init(x, y, w, h)
+    self.x = x or 0
+    self.y = y or 0
+    self.w = w or 0
+    self.h = h or 0
+end
+
+function PhysicsObject:col(a, tag)
+    for _, b in ipairs(Game.objects) do
+        if b.tags[tag] then
+            if a ~= b and AABB(a, b) then
+                return b
+            end
+        end
+    end
+    return nil
+end
+
+function PhysicsObject:move_x(x, tag)
+    self.x = self.x+x
+    local col = self:col(tag)
+    if col then
+        if x > 0 then
+            self.x = col.x-self.w
+        else
+            self.x = col.x+col.w
+        end
+    end
+    return col
+end
+
+function PhysicsObject:move_y(y, tag)
+    self.y = self.y+y
+    local col = self:col(tag)
+    if col then
+        if y > 0 then
+            self.y = col.y-self.h
+        else
+            self.y = col.y+col.h
+        end
+    end
+    return col
+end
