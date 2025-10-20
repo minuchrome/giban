@@ -39,8 +39,8 @@ function Game:draw()
     end
 
     Res:pass(function ()
-        love.graphics.setFont(Nabago)
-        love.graphics.print("테스트 test", 10, 10)
+        love.graphics.setFont(FontHigh)
+        love.graphics.print("test", 10, 10)
     end)
     
     Camera:stop()

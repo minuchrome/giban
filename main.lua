@@ -7,7 +7,7 @@ require("stuff.utils")
 
 function love.load()
     -- load before setting filter
-    -- Nabago = love.graphics.newFont("assets/fonts/NanumBarunGothic.ttf", 60)
+    FontHigh = love.graphics.newFont(60)
     
     love.graphics.setDefaultFilter("nearest", "nearest")
     love.graphics.setLineStyle("rough")
