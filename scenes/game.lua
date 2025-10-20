@@ -25,6 +25,10 @@ function Game:update(dt)
 end
 
 function Game:draw()
+    love.graphics.setColor(0.2, 0.2, 0.6)
+    love.graphics.rectangle("fill", 0, 0, Res.w, Res.h)
+    ResetColor()
+    Camera:start()
     -- table.sort(self.objects, function (a, b)
     --     return a.z < b.z
     -- end)
@@ -33,6 +37,18 @@ function Game:draw()
             object:draw()
         end
     end
+
+    Res:pass(function ()
+        love.graphics.setFont(FontHigh)
+        love.graphics.print("test", 10, 10)
+    end)
+    
+    Camera:stop()
+
+    Res:pass(function ()
+        love.graphics.setFont(FontHigh)
+        love.graphics.print("test2", 10, 50)
+    end)
 end
 
 return Game
