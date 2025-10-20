@@ -12,6 +12,7 @@ Camera.shake.damp = 0.1
 Camera.shake.x = 0
 Camera.shake.y = 0
 Camera.shake.duration = 0
+Camera.on = false
 
 function Camera:set(x, y)
     self.target_x = x
@@ -38,10 +39,12 @@ function Camera:start()
         love.graphics.translate(self.shake.x, self.shake.y)
     end
     love.graphics.translate(-self.x, -self.y)
+    self.on = true
 end
 
 function Camera:stop()
     love.graphics.pop()
+    self.on = false
 end
 
 function Camera:update(dt)

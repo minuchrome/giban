@@ -7,7 +7,13 @@ Res.shift = {x = 0, y = 0}
 Res.q = {}
 
 function Res:pass(callback)
-    table.insert(self.q, callback)
+    local x = Camera.x
+    local y = Camera.y
+    if not Camera.on then
+        x = 0
+        y = 0
+    end
+    table.insert(self.q, {callback = callback, x = x, y = y})
 end
 
 function Res:init()
@@ -31,8 +37,11 @@ function Res:after()
     love.graphics.push()
     love.graphics.translate(self.shift.x, self.shift.y)
     love.graphics.scale(self.zoom/scale, self.zoom/scale)
-    for _, callback in ipairs(self.q) do
-        callback()
+    for _, o in ipairs(self.q) do
+        love.graphics.push()
+        love.graphics.translate(-o.x*scale, -o.y*scale)
+        o.callback()
+        love.graphics.pop()
     end
     love.graphics.pop()
 end
