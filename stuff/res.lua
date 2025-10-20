@@ -1,10 +1,14 @@
+local scale = 2
+
 Res = {}
-Res.w = 1280/2
-Res.h = 720/2
-Res.shift = {
-    x = 0,
-    y = 0
-}
+Res.w = WINDOW_W/scale
+Res.h = WINDOW_H/scale
+Res.shift = {x = 0, y = 0}
+Res.q = {}
+
+function Res:pass(callback)
+    table.insert(self.q, callback)
+end
 
 function Res:init()
     local w, h = love.graphics.getDimensions()
@@ -17,11 +21,20 @@ end
 function Res:before()
     love.graphics.setCanvas(self.canvas)
     love.graphics.clear()
+    self.q = {}
 end
 
 function Res:after()
     love.graphics.setCanvas()
     love.graphics.draw(self.canvas, self.shift.x, self.shift.y, 0, self.zoom, self.zoom)
+
+    love.graphics.push()
+    love.graphics.translate(self.shift.x, self.shift.y)
+    love.graphics.scale(self.zoom/scale, self.zoom/scale)
+    for _, callback in ipairs(self.q) do
+        callback()
+    end
+    love.graphics.pop()
 end
 
 function Res:getX()

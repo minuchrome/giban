@@ -6,6 +6,9 @@ require("stuff.sm")
 require("stuff.utils")
 
 function love.load()
+    -- load before setting filter
+    -- Nabago = love.graphics.newFont("assets/fonts/NanumBarunGothic.ttf", 60)
+    
     love.graphics.setDefaultFilter("nearest", "nearest")
     love.graphics.setLineStyle("rough")
     
@@ -14,7 +17,7 @@ function love.load()
         require("objects."..object:sub(1, #object-#".lua"))
     end
 
-    Font = love.graphics.newFont("assets/fonts/Galmuri9.ttf")
+    Font = love.graphics.newFont("assets/fonts/Galmuri9.ttf", 10)
 
     Res:init()
     SM:init("game")
