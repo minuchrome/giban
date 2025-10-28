@@ -24,7 +24,7 @@ function love.load()
 end
 
 function love.update(dt)
-    dt = math.max(dt*60, 1.5)
+    dt = math.min(dt*60, 1.5)
     UpdateInputs()
     Camera:update(dt)
     SM:update(dt)
