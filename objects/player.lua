@@ -22,10 +22,10 @@ end
 function Player:update(dt)
     Camera:set(self.x, self.y)
     if Input.right.down then
-        self:move_x(2*dt, "wall")
+        self:move_x(4*dt, "wall")
     end
     if Input.left.down then
-        self:move_x(-2*dt, "wall")
+        self:move_x(-4*dt, "wall")
     end
 end
 
